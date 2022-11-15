@@ -1,5 +1,6 @@
 # TensorFlow and tf.keras
 import tensorflow as tf
+from playsound import playsound
 
 # Helper libraries
 import numpy as np
@@ -43,7 +44,7 @@ test_images = test_images / 255.0
 
 model = tf.keras.Sequential([
     tf.keras.layers.Flatten(input_shape=(28, 28)),
-    tf.keras.layers.Dense(128, activation='relu' ),
+    tf.keras.layers.Dense(128, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(l=0.01)),
     tf.keras.layers.Dense(10)
     ])
 
@@ -55,6 +56,7 @@ history = model.fit(train_images, train_labels, epochs=10, validation_split=0.33
 
 test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
 
-print('\nTraining accuracy:', round(history.history['accuracy'][-1],4))
-print('Validation accuracy:', round(history.history['val_accuracy'][-1],4))
-print('Test accuracy:', round(test_acc,4))
+print('\nTraining accuracy:', round(history.history['accuracy'][-1]*100,2),"%")
+print('Validation accuracy:', round(history.history['val_accuracy'][-1]*100,2),"%")
+print('Test accuracy:', round(test_acc*100,2),"%")
+playsound('E:\\Dokument\\Utbildning\\TIG300\\First Steps with TensorFlow\\Tensorflow\\done.mp3')
