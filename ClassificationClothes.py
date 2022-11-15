@@ -51,12 +51,10 @@ model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
 
-history = model.fit(train_images, train_labels, epochs=2, validation_split=0.33)
+history = model.fit(train_images, train_labels, epochs=10, validation_split=0.33)
 
 test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
 
-
-print(history.history)
 print('\nTraining accuracy:', round(history.history['accuracy'][-1],4))
-print('\nValidation accuracy:', round(history.history['val_accuracy'][-1],4))
-print('\nTest accuracy:', round(test_acc,4))
+print('Validation accuracy:', round(history.history['val_accuracy'][-1],4))
+print('Test accuracy:', round(test_acc,4))
